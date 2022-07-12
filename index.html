@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Input area -->
+    <div onclick="record()" ><img src="mic.png" alt=""></div>
+   <div id="speechToText"></div> 
+
+   <div id="light"> <img id="on" src="on.png" alt=""><img id="off" src="off.png" alt=""></div> 
+   
+    <input type="text" name="" id="speech" onclick="record()">
+
+    <style>
+        body{
+             background: rgba(33, 33, 33, 1);
+             
+        }
+
+        #speechToText{
+            position: absolute;
+            width: 203px;
+            height: 163px;
+            left: 657px;
+            top: 90px;
+            background: #EBFF00;
+            border-radius: 20px;
+            z-index: 5;
+            text-align: center;
+        }
+        #speech{
+            position: absolute;
+            width: 198px;
+            height: 20px;
+            left: 657px;
+            top: 250px;
+            background: #ffffff;
+            font-size: larger;
+            z-index: 5;
+            text-align: center;
+            
+        }
+        
+        #light{
+            background-color: #EBFF00;
+            z-index: 10;
+        }
+        #on{
+            position: absolute;
+            
+            left: 697px;
+            top: 400px;
+            background: #ffff00;
+            font-size: larger;
+            z-index: 5;
+            text-align: center;
+        }
+            
+        #off{
+            position: absolute;
+            
+            left: 697px;
+            top: 400px;
+            background: #ffffff;
+            font-size: larger;
+            z-index: 9;
+            text-align: center;
+        }
+
+        img{
+            position: absolute;
+            z-index: 10;
+            height: 140px;
+            left: 690px;
+            top: 101px;
+            text-align: center;
+        }
+
+
+    </style>
+    <!-- Below is the script for voice recognition and conversion to text-->
+    <script>
+        function record() {
+            var recognition = new webkitSpeechRecognition();
+            recognition.lang = "en-GB";
+            var x1,x2;
+
+            recognition.onresult = function(event) {
+                // console.log(event);
+                x1 = event.results[0][0].transcript;
+                x2=x1.toUpperCase();
+                document.getElementById('speech').value = x2;
+
+                if(x2.includes('ON')){
+                    let img1=document.getElementById('on');
+                    
+                    let img2=document.getElementById('off');
+
+                    img1.style.zIndex='9';
+                    img2.style.zIndex='6';
+                    
+                }
+                else if(x2.includes('OFF')){
+                    
+                    let img1=document.getElementById('on');
+                    
+                    let img2=document.getElementById('off');
+                  
+                    img1.style.zIndex='6';
+                    img2.style.zIndex='9';
+
+
+
+                }
+            }
+            recognition.start();
+
+        }
+    </script>
+    <!-- end of script -->
+</body>
+</html>
